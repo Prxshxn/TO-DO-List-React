@@ -18,9 +18,9 @@ export const Component = () => {
       )
     );
   };
-  const   clearAllTasks = () => {
-    setTasks([]);
-  }
+  const removeTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  };
 
 
   return (
@@ -33,13 +33,14 @@ export const Component = () => {
           onChange={(e) => setNewTask(e.target.value)}
         />
         <button onClick={addTask}>Add</button>
-        <button onClick={clearAllTasks}>CLEAR</button>
+        
       </div>
 
       <ul className="task-list">
         {tasks.map((task) => (
           <li key={task.id} className={task.completed ? "completed" : ""}>
-            <span onClick={() => toggleTask(task.id)}>{task.text}</span>\
+            <span onClick={() => toggleTask(task.id)}>{task.text}</span>
+            <button onClick={() => removeTask(task.id)}>Remove</button> 
           </li>
         ))}
       </ul>
